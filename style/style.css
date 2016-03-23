@@ -1,0 +1,69 @@
+body {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	font-family: Arial, Verdana, sans-serif;
+}
+
+header {
+	max-width: 100vw;
+	margin: auto;
+	height: 100px;
+	flex: 2;
+}
+
+.container {
+	min-width: 100vw;
+	display: flex;
+	flex-direction: row;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+
+main, aside {
+	min-width: 50vw;
+	height: auto;
+}
+
+h2 {
+	text-align: center;
+}
+
+ul, li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+li:hover {
+	background-color: #EEE;
+}
+
+.alpha {
+	border-right: 1px solid #000;
+	height: 50px;
+	padding: 1em;
+	box-sizing: border-box;
+	background-color: #EFF;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	-khtml-user-drag: element;
+	-webkit-user-drag: element;
+  	cursor: move;
+}
+
+.no-drag {
+    -moz-user-select: none; /* These user-select properties are inheritable, used to prevent text selection */
+    -webkit-user-select: none;
+    -ms-user-select: none; /* From IE10 only */
+    user-select: none; /* Not valid CSS yet, as of July 2012 */
+
+    -webkit-user-drag: none; /* Prevents dragging of images/divs etc */
+    user-drag: none;
+}
+
+.no-drag.over {
+  border: 2px dashed #000;
+}

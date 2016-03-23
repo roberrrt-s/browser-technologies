@@ -3,6 +3,8 @@ Fallbacks:
 
 ## Drag and Drop
 
+![alt tag](https://i.gyazo.com/ace7fc9b66500949aa9cdb6eadfb3549.png)
+
 Voor browsers die dit niet ondersteunen heb ik een combinatie van een bestaand Modernizr script en een stackoverflow artikel samengevoegd
 Mocht er geen drag & drop aanwezig zijn, dan is er fallback met behulp van een click en click systeem.
 

@@ -36,8 +36,12 @@ ul, li {
 }
 
 li:hover {
-	background-color: #EEE;
+	background-color: #FFF;
 }
+.alpha:hover {
+	background-color: #DDD;	
+}
+
 
 .alpha {
 	border-right: 1px solid #000;

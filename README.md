@@ -12,9 +12,11 @@ Mocht er geen drag & drop aanwezig zijn, dan is er fallback met behulp van een c
  - http://diveintohtml5.info/everything.html
  
 ## querySelectorAll
+![alt tag](https://i.gyazo.com/fe09cc26f68fd4eed0d7ecc7cb424001.png)
 
-Voor de querySelectorAll gebruik ik een getElementsByClassName, omdat ik elke class nodig heb.
+Voor de querySelectorAll gebruik ik een getElementsByClassName, omdat ik elke class nodig heb. Zo werkt de applicatie ook in IE4/5/6
 
 ## classList
+![alt tag](https://i.gyazo.com/a2f1dfc6e67de83b9ff1404e87aa48ed.png)
 
 Voor classList heb ik geen fallback, de 9.90% van de gebruikers hiervoor hebben deze ook niet nodig, omdat het over een simpel hover effect gaat.

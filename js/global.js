@@ -3,17 +3,19 @@
 	var remove = {
 		init: function() {
 
-			var inv = document.getElementsByClassName('invisible')
+			var inv = document.querySelectorAll('.invisible')
 
 			for(var i = 0; i < inv.length; i++) {
 				inv[i].setAttribute('class', 'alpha')
 			}
 
-			var fallback = document.getElementsByClassName('fallback')
+			var fallback = document.querySelectorAll('.fallback')
 
 			var button = document.querySelector('button')
 
 			button.parentNode.removeChild(button);
+
+			console.log(fallback.length)
 
 			for(var i = 0; i < fallback.length; i++) {
 				fallback[i].parentNode.removeChild(fallback[i]);
@@ -28,10 +30,6 @@
 
 			var self = this;
 			var alpha = document.getElementsByClassName('alpha');
-
-			if(alpha < 1) {
-				var alpha = document.getElementsByClassName('alpha');
-			}
 
 			for(var i = 0; i < alpha.length; i++) {
 				alpha[i].addEventListener('dragstart', self.start, false);
@@ -96,20 +94,15 @@
 			var self = this;
 			var alpha = document.getElementsByClassName('alpha');
 
-			if(alpha < 1) {
-				var alpha = document.getElementsByClassName('alpha');
-			}
-
 			for(var i = 0; i < alpha.length; i++) {
 				alpha[i].addEventListener('click', self.element, false);
+				alpha[i].addEventListener('onkeydown', self.tab, false);
 			}
 		},
 
 		element: function(e) {
 
 			if(click.src) {
-
-				console.log(click.src)
 
 				var parent = click.src.parentNode
 
@@ -121,10 +114,35 @@
 			}
 			else {
 				if(e.target.getAttribute('draggable') == "true") {
-					console.log("good one")
 					click.src = e.target
 				}
-				console.log(click.src)
+			}
+
+		},
+
+		tab: function(e) {
+
+			console.log("HELLO")
+
+			if(!e.keyCode !== 13) {
+				console.log('not enter');
+				return false
+			}
+
+			if(click.src) {
+
+				var parent = click.src.parentNode
+
+				e.target.parentNode.insertBefore(click.src, e.target)
+				parent.appendChild(e.target)
+
+				click.src = null;
+
+			}
+			else {
+				if(e.target.getAttribute('draggable') == "true") {
+					click.src = e.target
+				}
 			}
 
 		},

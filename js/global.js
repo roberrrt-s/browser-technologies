@@ -1,28 +1,31 @@
 (function() {
-	var check = {
+
+	var remove = {
 		init: function() {
 
-			var iOS = !!navigator.userAgent.match('iPhone OS') || !!navigator.userAgent.match('iPad');
+			var inv = document.querySelectorAll('.invisible')
 
-			if (this.modernizr && !iOS) {
-			    drag.init()
-			} else if (this.modernizr && iOS) {
-			    drag.init()
-			} else {
-			    click.init()
+			for(var i = 0; i < inv.length; i++) {
+				inv[i].setAttribute('class', 'alpha')
 			}
-		},
 
-		modernizr: function() {
-		    var div = document.createElement('div');
-		    return ('draggable' in div) || ('ondragstart' in div && 'ondrop' in div);
+			var fallback = document.querySelectorAll('.fallback')
+
+			var button = document.querySelector('button')
+
+			button.parentNode.removeChild(button);
+
+			for(var i = 0; i < fallback.length; i++) {
+				fallback[i].parentNode.removeChild(fallback[i]);
+			}
+
 		}
-
 	}
 
 	var drag = {
 
 		init: function() {
+
 			var self = this;
 			var alpha = document.querySelectorAll('.alpha');
 
@@ -30,16 +33,14 @@
 				var alpha = document.getElementsByClassName('alpha');
 			}
 
-
-			[].forEach.call(alpha, function(el) {
-				el.addEventListener('dragstart', self.start, false);
-				el.addEventListener('dragenter', self.enter, false);
-				el.addEventListener('dragover', self.over, false);
-				el.addEventListener('dragleave', self.leave, false);
-				el.addEventListener('drop', self.drop, false);
-				el.addEventListener('dragend', self.end, false);
-			});
-
+			for(var i = 0; i < alpha.length; i++) {
+				alpha[i].addEventListener('dragstart', self.start, false);
+				alpha[i].addEventListener('dragenter', self.enter, false);
+				alpha[i].addEventListener('dragover', self.over, false);
+				alpha[i].addEventListener('dragleave', self.leave, false);
+				alpha[i].addEventListener('drop', self.drop, false);
+				alpha[i].addEventListener('dragend', self.end, false);
+			}
 		},
 
 
@@ -91,6 +92,7 @@
 	var click = {
 
 		init: function() {
+
 			var self = this;
 			var alpha = document.querySelectorAll('.alpha');
 
@@ -98,12 +100,13 @@
 				var alpha = document.getElementsByClassName('alpha');
 			}
 
-			[].forEach.call(alpha, function(el) {
-				el.addEventListener('click', self.element, false);
-			});
+			for(var i = 0; i < alpha.length; i++) {
+				alpha[i].addEventListener('click', self.element, false);
+			}
 		},
 
 		element: function(e) {
+
 			if(click.src) {
 
 				console.log(click.src)
@@ -129,6 +132,8 @@
 		src: null
 	}
 
-	check.init();
+	remove.init();
+	drag.init();
+	click.init();
 
 }())

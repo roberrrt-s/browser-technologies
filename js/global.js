@@ -3,13 +3,13 @@
 	var remove = {
 		init: function() {
 
-			var inv = document.querySelectorAll('.invisible')
+			var inv = document.getElementsByClassName('invisible')
 
 			for(var i = 0; i < inv.length; i++) {
 				inv[i].setAttribute('class', 'alpha')
 			}
 
-			var fallback = document.querySelectorAll('.fallback')
+			var fallback = document.getElementsByClassName('fallback')
 
 			var button = document.querySelector('button')
 
@@ -27,7 +27,7 @@
 		init: function() {
 
 			var self = this;
-			var alpha = document.querySelectorAll('.alpha');
+			var alpha = document.getElementsByClassName('alpha');
 
 			if(alpha < 1) {
 				var alpha = document.getElementsByClassName('alpha');
@@ -94,7 +94,7 @@
 		init: function() {
 
 			var self = this;
-			var alpha = document.querySelectorAll('.alpha');
+			var alpha = document.getElementsByClassName('alpha');
 
 			if(alpha < 1) {
 				var alpha = document.getElementsByClassName('alpha');

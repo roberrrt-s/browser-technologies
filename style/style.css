@@ -61,7 +61,7 @@ li:hover {
   	cursor: move;
 }
 
-.no-drag {
+.niet-slepen {
     -moz-user-select: none; /* These user-select properties are inheritable, used to prevent text selection */
     -webkit-user-select: none;
     -ms-user-select: none; /* From IE10 only */
@@ -71,6 +71,6 @@ li:hover {
     user-drag: none;
 }
 
-.no-drag.over {
+.niet-slepen.over {
   border: 2px dashed #000;
 }

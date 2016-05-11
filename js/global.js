@@ -101,6 +101,14 @@
 		src: null
 	}
 
+	var basic = {
+
+		init: function() {
+
+		}
+
+	}
+
 	drag.init();
 	click.init();
 

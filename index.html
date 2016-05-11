@@ -12,48 +12,22 @@
 			<h1>Boodschappenlijstje-bouwer</h1>
 		</header>
 		<section class="container">
-			<section class="conten">
-				<ul>
-					<li>
-						<h2>Lijstje</h2>
-					</li>
-					<li>
-						<div tabindex="0" aria-label="leeg" class="niet-slepen alpha" draggable="false" unselectable="on"></div>
-					</li>
-					<li>
-						<div tabindex="0" aria-label="leeg" class="niet-slepen alpha" draggable="false" unselectable="on"></div>
-					</li>
-					<li>
-						<div tabindex="0" aria-label="leeg" class="niet-slepen alpha" draggable="false" unselectable="on"></div>
-					</li>
-					<li>
-						<div tabindex="0" aria-label="leeg" class="niet-slepen alpha" draggable="false" unselectable="on"></div>
-					</li>
-					<li>
-						<div tabindex="0" aria-label="leeg" class="niet-slepen alpha" draggable="false" unselectable="on"></div>
-					</li>
-					<li>
-						<div tabindex="0" aria-label="leeg" class="niet-slepen alpha" draggable="false" unselectable="on"></div>
-					</li>
-					<li>
-						<div tabindex="0" aria-label="leeg" class="niet-slepen alpha" draggable="false" unselectable="on"></div>
-					</li>
-					<li>
-						<div tabindex="0" aria-label="leeg" class="niet-slepen alpha" draggable="false" unselectable="on"></div>
-					</li>
-					<li>
-						<div tabindex="0" aria-label="leeg" class="niet-slepen alpha" draggable="false" unselectable="on"></div>
-					</li>
-				</ul>
-			</section class="content">
 			<section class="content">
-				<ul>
+				<ul id="get">
+					<li>
+						<h2>Meenemen</h2>
+					</li>
+					<li></li>
+				</ul>
+			</section>
+			<section class="content">
+				<ul id="options">
 					<li>
 						<h2>Ingredienten</h2>
 					</li>
 					<li>
 						<div class="alpha">
-							<labelo>Witbrood
+							<label>Witbrood
 								<input id="witbrood" type="checkbox">
 							</label>
 						</div>
@@ -103,21 +77,22 @@
 					<li>
 						<div class="alpha">
 							<label>Oude ham
-								<input id="ketchup" type="checkbox">
+								<input id="oudeham" type="checkbox">
 							</label>
 						</div>
 					</li>
 					<li>
 						<div class="alpha">
 							<label>Jonge ham
-								<input id="ketchup" type="checkbox">
+								<input id="jongeham" type="checkbox">
 							</label>
 						</div>
 					</li>
 				</ul>
-			</section class="content">
+			</section>
 		</section>
-		<button>Submit</button>
+		<button id="submit">Submit</button>
 	</body>
 	<script src="js/min/global.min.js"></script>
+	<script src="js/basic.js"></script>
 </html>

@@ -5,20 +5,34 @@ var d = (function(){
 		var alpha = document.getElementsByClassName('alpha');
 
 		for(var i = 0; i < alpha.length; i++) {
-			alpha[i].addEventListener('dragstart', start, false);
-			alpha[i].addEventListener('dragenter', enter, false);
-			alpha[i].addEventListener('dragover', over, false);
-			alpha[i].addEventListener('dragleave', leave, false);
-			alpha[i].addEventListener('drop', drop, false);
-			alpha[i].addEventListener('dragend', end, false);
+			alpha[i].addEventListener('dragstart', start, !1);
+			alpha[i].addEventListener('dragenter', enter, !1);
+			alpha[i].addEventListener('dragover', over, !1);
+			alpha[i].addEventListener('dragleave', leave, !1);
+			alpha[i].addEventListener('drop', drop, !1);
+			alpha[i].addEventListener('dragend', end, !1);
 		}
 	};
 
 	var start = function(e) {
-		console.log(start)
-		drag.src = this;
-		e.dataTransfer.effectAllowed = 'move';
-		e.dataTransfer.setData('text/html', this.innerHTML);
+		console.log('start')
+
+		var get = document.getElementById('get');
+		var options = document.getElementById('options');
+
+		if(e.srcElement.parentNode.parentNode === get) {
+			options.parentNode.className = "content over";
+			console.log('added over to options')
+		}
+		else if(e.srcElement.parentNode.parentNode === options) {
+			get.parentNode.className = "content over";
+			console.log('added over to get')
+		}
+		else {
+			console.log('Something went wrong (unknown element origin)');
+		}
+
+		console.log(e.srcElement.parentNode.parentNode)
 	};
 
 	var enter = function(e) {
@@ -26,42 +40,33 @@ var d = (function(){
 	};
 
 	var over = function(e) {
-		console.log(over);
-		if (e.preventDefault) {
-			e.preventDefault();
-		}
-
-		this.classList.add('over');
-
-		e.dataTransfer.dropEffect = 'move';
-
-		return false;
+		console.log('over');
 	};
 
 	var drop = function(e) {
-		if (e.stopPropagation) {
-			e.stopPropagation();
-		}
-
-	  this.classList.remove('over');
-
-		if (drag.src != this) {
-			var parent = drag.src.parentNode
-
-			this.parentNode.insertBefore(drag.src, this)
-			parent.appendChild(this)
-
-		}
-
-		return false;
+		console.log('drop')
 	};
 
 	var leave = function(e) {
-	  this.classList.remove('over');
+		console.log('leave')
 	};
 
 	var end = function(e) {
 		console.log('end');
+
+		if(e.srcElement.parentNode.parentNode === get) {
+			options.parentNode.className = "content";
+			console.log('removed over to options')
+		}
+		else if(e.srcElement.parentNode.parentNode === options) {
+			get.parentNode.className = "content";
+			console.log('removed over to get')
+		}
+		else {
+			console.log('Something went wrong (unknown element origin)');
+		}
+
+		console.log(e.srcElement.parentNode.parentNode)
 	};
 
 	return {
@@ -82,32 +87,49 @@ var c = (function(){
 		var alpha = document.getElementsByClassName('alpha');
 
 		for(var i = 0; i < alpha.length; i++) {
-			alpha[i].addEventListener('click', element, false);
+			alpha[i].addEventListener('click', element, !1);
 		}
-	};
 
+	};
 
 	var element = function(e) {
 
 		var get = document.getElementById('get');
 		var options = document.getElementById('options');
+		var div = e.target;
 
-		if(e.target.parentNode.parentNode === get) {
-			var clone = e.target.parentNode.cloneNode(true);
-			get.removeChild(e.target.parentNode);
-			options.appendChild(clone);
-			clone.lastElementChild.addEventListener('click', element, false);
+		while(div.nodeName !== "DIV") {
+			div = div.parentNode;
 		}
-		else if(e.target.parentNode.parentNode === options) {
-			var clone = e.target.parentNode.cloneNode(true);
-			options.removeChild(e.target.parentNode);
+
+		console.log(div)
+
+		if(div.parentNode.parentNode === get) {
+			var clone = div.parentNode.cloneNode(!0);
+			get.removeChild(div.parentNode);
+			options.appendChild(clone);
+			clone.lastElementChild.addEventListener('click', element, !1);
+			clone.lastElementChild.addEventListener('dragstart', d.start, !1);
+			clone.lastElementChild.addEventListener('dragenter', d.enter, !1);
+			clone.lastElementChild.addEventListener('dragover', d.over, !1);
+			clone.lastElementChild.addEventListener('dragleave', d.leave, !1);
+			clone.lastElementChild.addEventListener('drop', d.drop, !1);
+			clone.lastElementChild.addEventListener('dragend', d.end, !1);
+		}
+		else if(div.parentNode.parentNode === options) {
+			var clone = div.parentNode.cloneNode(!0);
+			options.removeChild(div.parentNode);
 			get.appendChild(clone);
-			clone.lastElementChild.addEventListener('click', element, false);			
+			clone.lastElementChild.addEventListener('click', element, !1);
+			clone.lastElementChild.addEventListener('dragstart', d.start, !1);
+			clone.lastElementChild.addEventListener('dragenter', d.enter, !1);
+			clone.lastElementChild.addEventListener('dragover', d.over, !1);
+			clone.lastElementChild.addEventListener('dragleave', d.leave, !1);
+			clone.lastElementChild.addEventListener('drop', d.drop, !1);
+			clone.lastElementChild.addEventListener('dragend', d.end, !1);
 		}
 		else {
-			console.log("Something went wrong! (incorrect container provided)")
 		}
-
 
 	};
 

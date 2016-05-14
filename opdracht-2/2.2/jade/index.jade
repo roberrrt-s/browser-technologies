@@ -1,0 +1,48 @@
+doctype html
+html
+	head
+		title Funda Roaming
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		link(rel='stylesheet', href='style/style.css')
+		link(rel='shortcut icon', href='favicon.ico', type='image/x-icon')
+		link(rel='icon', href='favicon.ico', type='image/x-icon')
+		script(type='text/javascript', src='lib/geo-min.js')
+		script(type='text/javascript', src='lib/jquery-min.js')
+		script(type='text/javascript', src='lib/underscore-min.js')
+		script(type='text/javascript', src="js/cmdgeo.js")
+	body
+		header
+			nav
+				ul
+					li 
+						a(href="#/home") Home
+					li 
+						a(href="#/roam") Roam
+					li 
+						a(href="#/saved") Favorieten
+		section#home-container
+			.read-box
+				h1 Funda Roaming
+				p Met Funda Roaming kun jij, terwijl je rondloopt kijken of er huizen in de buurt te koop zijn.
+				h3 Hoe werkt het?
+				p Funda Roaming kijkt naar de locatie op jouw telefoon, en pakt daar alle te koop staande huizen in een straal van 15 kilometer bij, vervolgens is het de bedoeling dat jij rond gaat lopen in de buurt. Op het moment dat jij dicht bij een te koop staande woning komt geven wij je een melding. Deze woningen kun jij vervolgens opslaan in je shortlist, deze is ook weer terug te vinden op funda.nl
+
+		section#tracker-container
+			#house-preview
+			#track-box
+				.load-information
+					h3 Je kunt nu de buurt verkennen 
+					h4 Je ontvangt een melding als er een woning dichtbij is
+					.loader
+					h5 Aan het zoeken...
+
+		section#saved-container
+			#saved-box
+				h3 Je hebt nog geen woningen opgeslagen!
+				h4 Voeg woningen die je tegenkomt toe aan deze lijst.
+
+		#map_canvas
+
+	script(type='text/javascript', src='js/template.js')
+	script(type='text/javascript', src='js/global.js')

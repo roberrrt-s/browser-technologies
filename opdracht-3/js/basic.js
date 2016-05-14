@@ -35,6 +35,9 @@
 					options.appendChild(clone);
 				}
 			}
+
+			c.init();
+			d.init();
 		}
 
 	}

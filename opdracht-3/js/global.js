@@ -1,38 +1,24 @@
 var d = (function(){
 
-	var init = function() {
-
-		var alpha = document.getElementsByClassName('alpha');
-
-		for(var i = 0; i < alpha.length; i++) {
-			alpha[i].addEventListener('dragstart', start, !1);
-			alpha[i].addEventListener('dragenter', enter, !1);
-			alpha[i].addEventListener('dragover', over, !1);
-			alpha[i].addEventListener('dragleave', leave, !1);
-			alpha[i].addEventListener('drop', drop, !1);
-			alpha[i].addEventListener('dragend', end, !1);
-		}
-	};
-
 	var start = function(e) {
 		console.log('start')
+
+		dragSrc = e.target;
 
 		var get = document.getElementById('get');
 		var options = document.getElementById('options');
 
-		if(e.srcElement.parentNode.parentNode === get) {
+		if(dragSrc === get) {
 			options.parentNode.className = "content over";
 			console.log('added over to options')
 		}
-		else if(e.srcElement.parentNode.parentNode === options) {
+		else if(dragSrc === options) {
 			get.parentNode.className = "content over";
 			console.log('added over to get')
 		}
 		else {
 			console.log('Something went wrong (unknown element origin)');
 		}
-
-		console.log(e.srcElement.parentNode.parentNode)
 	};
 
 	var enter = function(e) {
@@ -40,15 +26,49 @@ var d = (function(){
 	};
 
 	var over = function(e) {
+		e.preventDefault()
 		console.log('over');
 	};
 
 	var drop = function(e) {
-		console.log('drop')
+ 		e.preventDefault();
+		console.log('drop');
+
+		var get = document.getElementById('get');
+		var options = document.getElementById('options');
+
+		console.log(e.target)
+
+		console.log(dragSrc.parentNode)
+
+		if(e.target === get && dragSrc.parentNode.parentNode === options) {
+
+			var clone = dragSrc.parentNode.cloneNode(!0);
+			options.removeChild(dragSrc.parentNode);
+			get.appendChild(clone);
+			ev.addEvents(clone.lastElementChild);
+
+		}
+		else if(e.target === options && dragSrc.parentNode.parentNode === get) {
+
+			var clone = dragSrc.parentNode.cloneNode(!0);
+			get.removeChild(dragSrc.parentNode);
+			options.appendChild(clone);
+			ev.addEvents(clone.lastElementChild);
+
+		}
+		else {
+			console.log('Something went wrong! (faulty target)')
+		}
+
+		dragSrc = null;
+
 	};
 
 	var leave = function(e) {
-		console.log('leave')
+		e.preventDefault();
+		e.stopPropagation()
+		console.log('leave');
 	};
 
 	var end = function(e) {
@@ -66,31 +86,23 @@ var d = (function(){
 			console.log('Something went wrong (unknown element origin)');
 		}
 
-		console.log(e.srcElement.parentNode.parentNode)
 	};
 
+	var dragSrc = null;
+
 	return {
-		init: init,
 		start: start,
 		enter: enter,
 		over: over,
 		drop: drop,
-		leave: leave
+		end: end,
+		leave: leave,
+		dragSrc: dragSrc
 	}
 
 }());
 
 var c = (function(){
-
-	var init = function() {
-
-		var alpha = document.getElementsByClassName('alpha');
-
-		for(var i = 0; i < alpha.length; i++) {
-			alpha[i].addEventListener('click', element, !1);
-		}
-
-	};
 
 	var element = function(e) {
 
@@ -102,31 +114,18 @@ var c = (function(){
 			div = div.parentNode;
 		}
 
-		console.log(div)
-
 		if(div.parentNode.parentNode === get) {
 			var clone = div.parentNode.cloneNode(!0);
 			get.removeChild(div.parentNode);
 			options.appendChild(clone);
-			clone.lastElementChild.addEventListener('click', element, !1);
-			clone.lastElementChild.addEventListener('dragstart', d.start, !1);
-			clone.lastElementChild.addEventListener('dragenter', d.enter, !1);
-			clone.lastElementChild.addEventListener('dragover', d.over, !1);
-			clone.lastElementChild.addEventListener('dragleave', d.leave, !1);
-			clone.lastElementChild.addEventListener('drop', d.drop, !1);
-			clone.lastElementChild.addEventListener('dragend', d.end, !1);
+			ev.addEvents(clone.lastElementChild);
 		}
 		else if(div.parentNode.parentNode === options) {
 			var clone = div.parentNode.cloneNode(!0);
 			options.removeChild(div.parentNode);
 			get.appendChild(clone);
-			clone.lastElementChild.addEventListener('click', element, !1);
-			clone.lastElementChild.addEventListener('dragstart', d.start, !1);
-			clone.lastElementChild.addEventListener('dragenter', d.enter, !1);
-			clone.lastElementChild.addEventListener('dragover', d.over, !1);
-			clone.lastElementChild.addEventListener('dragleave', d.leave, !1);
-			clone.lastElementChild.addEventListener('drop', d.drop, !1);
-			clone.lastElementChild.addEventListener('dragend', d.end, !1);
+			console.log(e);
+			ev.addEvents(clone.lastElementChild);
 		}
 		else {
 		}
@@ -134,11 +133,71 @@ var c = (function(){
 	};
 
 	return {
-		init: init,
 		element: element
 	}
 
 }())
 
-d.init();
-c.init();
+var ev = (function(){
+
+	var init = function() {
+
+		var el = document.getElementsByClassName('alpha');
+
+		if(document.addEventListener){
+
+			var get = document.getElementById('get');
+			var options = document.getElementById('options');
+			get.addEventListener('drop', d.drop, !1);
+			get.addEventListener('dragover', d.over, !1);
+
+			options.addEventListener('drop', d.drop, !1);
+			options.addEventListener('dragover', d.over, !1);
+
+			for(var i = 0; i < el.length; i++) {
+				el[i].addEventListener('click', c.element, !1);
+				el[i].addEventListener('dragstart', d.start, !1);
+				el[i].addEventListener('dragenter', d.enter, !1);
+				el[i].addEventListener('dragleave', d.leave, !1);
+				el[i].addEventListener('dragend', d.end, !1);
+			}
+		}
+
+		else if(document.attachEvent) {
+			for(var i = 0; i < el.length; i++) {
+				el[i].attachEvent('click', c.element);
+				el[i].attachEvent('dragstart', d.start);
+				el[i].attachEvent('dragenter', d.enter);
+				el[i].attachEvent('dragleave', d.leave);
+				el[i].attachEvent('dragend', d.end);
+			}
+		}
+
+	}
+
+	var addEvents = function(el) {
+
+		if(document.addEventListener){  
+			el.addEventListener('click', c.element, !1);
+			el.addEventListener('dragstart', d.start, !1);
+			el.addEventListener('dragenter', d.enter, !1);
+			el.addEventListener('dragleave', d.leave, !1);
+			el.addEventListener('dragend', d.end, !1);
+		} else if (document.attachEvent){  
+			el.attachEvent('click', c.element);
+			el.attachEvent('dragstart', d.start);
+			el.attachEvent('dragenter', d.enter);
+			el.attachEvent('dragleave', d.leave);
+			el.attachEvent('dragend', d.end);
+		}
+	};
+
+	return {
+		init: init,
+		addEvents: addEvents
+	}
+
+
+}())
+
+ev.init();

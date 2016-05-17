@@ -75,7 +75,6 @@ var d = (function(){
 
 	return {
 		start: start,
-		enter: enter,
 		over: over,
 		drop: drop,
 		end: end,

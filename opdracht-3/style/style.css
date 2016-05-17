@@ -78,3 +78,7 @@ ul, li {
 .over {
     background-color: #F9FFFF;
 }
+
+#submit { 
+    min-width: 100%;
+}

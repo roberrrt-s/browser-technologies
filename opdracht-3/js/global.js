@@ -1,7 +1,6 @@
 var d = (function(){
 
 	var start = function(e) {
-		console.log('start')
 
 		dragSrc = e.target;
 
@@ -10,36 +9,24 @@ var d = (function(){
 
 		if(dragSrc === get) {
 			options.parentNode.className = "content over";
-			console.log('added over to options')
 		}
 		else if(dragSrc === options) {
 			get.parentNode.className = "content over";
-			console.log('added over to get')
 		}
 		else {
 			console.log('Something went wrong (unknown element origin)');
 		}
 	};
 
-	var enter = function(e) {
-		console.log('enter');
-	};
-
 	var over = function(e) {
 		e.preventDefault()
-		console.log('over');
 	};
 
 	var drop = function(e) {
  		e.preventDefault();
-		console.log('drop');
 
 		var get = document.getElementById('get');
 		var options = document.getElementById('options');
-
-		console.log(e.target)
-
-		console.log(dragSrc.parentNode)
 
 		if(e.target === get && dragSrc.parentNode.parentNode === options) {
 
@@ -68,19 +55,15 @@ var d = (function(){
 	var leave = function(e) {
 		e.preventDefault();
 		e.stopPropagation()
-		console.log('leave');
 	};
 
 	var end = function(e) {
-		console.log('end');
 
 		if(e.srcElement.parentNode.parentNode === get) {
 			options.parentNode.className = "content";
-			console.log('removed over to options')
 		}
 		else if(e.srcElement.parentNode.parentNode === options) {
 			get.parentNode.className = "content";
-			console.log('removed over to get')
 		}
 		else {
 			console.log('Something went wrong (unknown element origin)');

@@ -106,7 +106,6 @@ var c = (function(){
 			var clone = div.parentNode.cloneNode(!0);
 			options.removeChild(div.parentNode);
 			get.appendChild(clone);
-			console.log(e);
 			ev.addEvents(clone.lastElementChild);
 		}
 		else {
@@ -132,7 +131,6 @@ var ev = (function(){
 			var options = document.getElementById('options');
 			get.addEventListener('drop', d.drop, !1);
 			get.addEventListener('dragover', d.over, !1);
-
 			options.addEventListener('drop', d.drop, !1);
 			options.addEventListener('dragover', d.over, !1);
 

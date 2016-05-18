@@ -9,7 +9,6 @@ var basic = (function() {
 
 	var submit = function(e) {
 		e.preventDefault();
-		console.log('hello');
 		basic.order();
 	};
 
